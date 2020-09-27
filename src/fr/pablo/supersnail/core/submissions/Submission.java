@@ -8,14 +8,16 @@ public class Submission {
     private Long authorID;
     private SubmissionType submissionType;
     private int id;
+    private String authorTag;
 
-    public Submission(String title, String desc, String dlLink, Long authorID, SubmissionType submissionType, int id) {
+    public Submission(String title, String desc, String dlLink, Long authorID, SubmissionType submissionType, int id, String authorTag) {
         this.title = title;
         this.desc = desc;
         this.dlLink = dlLink;
         this.authorID = authorID;
         this.submissionType = submissionType;
         this.id = id;
+        this.authorTag = authorTag;
     }
 
     public String getTitle() {
@@ -64,5 +66,13 @@ public class Submission {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getAuthorTag() {
+        return authorTag;
+    }
+
+    public void setAuthorTag(String authorTag) {
+        this.authorTag = authorTag;
     }
 }

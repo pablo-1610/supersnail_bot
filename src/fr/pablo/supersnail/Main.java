@@ -12,7 +12,7 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 public class Main {
-
+    public static String credits = "Super Snail © 2020 | Join us: https://discord.gg/6UM7UcW";
     public static Broadcaster broadcaster;
 
     public static JDA jda;

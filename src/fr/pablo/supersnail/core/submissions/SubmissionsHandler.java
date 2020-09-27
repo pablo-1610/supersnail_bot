@@ -18,7 +18,7 @@ public class SubmissionsHandler {
         count = count + 1;
         submissionBuilder.get(id).setId(count);
         Submission submission = submissionBuilder.get(id);
-        Main.jda.getTextChannelById(759473920943980604L).sendMessage("**Title**: `"+submission.getTitle()+"` by <@"+submission.getAuthorID()+">\n\n**Desc**: "+submission.getDesc()+"\n\n**Download**: "+submission.getDlLink()).queue(message -> {
+        Main.jda.getTextChannelById(759473920943980604L).sendMessage("**ID**: "+submission.getId()+"\n\n**Title**: `"+submission.getTitle()+"` by <@"+submission.getAuthorID()+"> ("+submission.getAuthorTag()+")\n\n**Desc**: "+submission.getDesc()+"\n\n**Download**: "+submission.getDlLink()).queue(message -> {
             submissions.put(message.getIdLong(),submission);
             message.addReaction("✅").queue();
             message.addReaction("⛔").queue();

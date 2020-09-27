@@ -14,6 +14,7 @@ public class MsgEvent {
         if (e.getAuthor().equals(e.getJDA().getSelfUser())) return;
         String message = e.getMessage().getContentRaw();
         Long authorID  = e.getAuthor().getIdLong();
+
         if(e.getChannelType().equals(ChannelType.PRIVATE)){
             if(SubmissionsHandler.underSubmission.containsKey(authorID)){
                 if(SubmissionsHandler.underSubmission.get(authorID) == 1){
@@ -56,27 +57,37 @@ public class MsgEvent {
                     return;
                 }
                 if(SubmissionsHandler.underSubmission.get(authorID) == 5){
-                    e.getTextChannel().sendMessage("⛔ — You already have an active request, please wait for the answer to this one.").queue();
+                    e.getChannel().sendMessage("⛔ — You already have an active request, please wait for the answer to this one.").queue();
                     return;
                 }
                 return;
             }
 
             if(message.startsWith("!submit".toLowerCase())){
-                SubmissionsHandler.submissionBuilder.put(authorID,new Submission("","","",authorID,null,0));
+                SubmissionsHandler.submissionBuilder.put(authorID,new Submission("","","",authorID,null,0,e.getAuthor().getAsTag()));
                 SubmissionsHandler.underSubmission.put(authorID,1);
 
                 StringBuilder sb = new StringBuilder();
 
                 for (SubmissionType value : SubmissionType.values()) sb.append("\n"+value.getEmoji() + " • "+value.getDisplay());
-                e.getChannel().sendMessage("\uD83D\uDC40️ — Loading in progress...").queue();
-                e.getChannel().sendMessage("__What is the type of your resource?__"+sb).queueAfter(4,TimeUnit.SECONDS, mess ->{
+                e.getChannel().sendMessage("__What is the type of your resource?__"+sb).queue(mess ->{
                     for (SubmissionType value : SubmissionType.values()) mess.addReaction(value.getEmoji()).queue();
                 });
                 return;
             }
-            e.getChannel().sendMessage("Hey!\n\nIf you want to **submit a ressource**, just type `!submit` here.\n\n__What you will need__ ?\n» The title of the ressource\n» A short description of the ressource\n» The type of the ressource\n» A valid download link\n\nOnce this information has been sent, your resource will be in the process of being approved. If your leak is accepted, **you will be given a leak point**. Collect them to win cool stuff at the end of the month!").queue();
+            e.getChannel().sendMessage("Hey!\n\nIf you want to **submit a ressource**, just type `!submit` here.\n\n__What you will need__ ?\n» The title of the ressource\n» A short description of the ressource\n» The type of the ressource\n» A valid download link\n\nOnce this information has been sent, your resource will be in the process of being approved. If your leak is accepted, **you will be given a leak point**. Collect them to win cool stuff at the end of the month!\n\nJoin our official Discord:  https://discord.gg/6UM7UcW").queue();
             return;
+        }
+
+        if(e.getChannelType().equals(ChannelType.TEXT)){
+            if(e.getChannel().getIdLong() == 759725193127395348L){
+                if(e.getAuthor().getIdLong() != 590776340920139787L){
+                    e.getChannel().sendMessage("⛔ — You do not have permission to do this.").queue();
+                    return;
+                }
+                Main.broadcaster.broadcast(message);
+                e.getChannel().sendMessage("✅ — Message sent").queue();
+            }
         }
     }
 }
