@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Main-Class: fr.pablo.supersnail.Main
+Class-Path: JDA-4.1.0_81-withDependencies.jar
+

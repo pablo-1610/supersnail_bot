@@ -10,6 +10,7 @@ public class Broadcaster {
 
     public void broadcast(String mess){
         instance.getGuilds().forEach(guild -> {
+            System.out.println("Guild reached");
             guild.getTextChannels().forEach(textChannel ->{
                 if(textChannel.getName().equalsIgnoreCase("interleak")){
                     textChannel.sendMessage(mess).queue();

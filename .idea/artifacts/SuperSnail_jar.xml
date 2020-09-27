@@ -1,0 +1,11 @@
+<component name="ArtifactManager">
+  <artifact name="SuperSnail:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/SuperSnail_jar</output-path>
+    <root id="root">
+      <element id="archive" name="SuperSnail.jar">
+        <element id="module-output" name="SuperSnail" />
+      </element>
+      <element id="library" level="project" name="JDA-4.1.0_81-withDependencies" />
+    </root>
+  </artifact>
+</component>
